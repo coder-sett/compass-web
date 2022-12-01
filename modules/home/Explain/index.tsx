@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import { useCounter } from 'react-use';
+import { useInViewport } from 'ahooks';
 import { usePlantList } from './plantConfig';
 import PopCard from './PopCard';
 import Plant from './Plant';
@@ -16,22 +17,28 @@ const SectionExplain = () => {
     plantList.length,
     0
   );
-
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inViewport] = useInViewport(sectionRef);
   return (
     <section>
       <div
-        id="sectionexplain"
         className={classnames(
           styles.bg,
           'relative h-[900px] w-full overflow-hidden'
         )}
       >
         <div className={classnames('h-full w-full')}>
-          {/*<div className={classnames(styles.constelacao)}>*/}
-          {/*  {Array.from({ length: 250 }, (v, k) => k).map((i) => (*/}
-          {/*    <Estrela key={i} />*/}
-          {/*  ))}*/}
-          {/*</div>*/}
+          <div
+            id="sectionexplain"
+            ref={sectionRef}
+            className={classnames(styles.constelacao, [
+              inViewport ? styles.running : styles.paused,
+            ])}
+          >
+            {Array.from({ length: 60 }, (v, k) => k).map((i) => (
+              <Estrela key={i} />
+            ))}
+          </div>
           <div
             className={classnames(styles.plantBg, 'h-full w-full')}
             onClick={(e) => {

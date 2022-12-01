@@ -11,13 +11,14 @@ const Estrela: React.FC = () => {
     const box = document.getElementById('sectionexplain');
     const offsetWidth = box?.offsetWidth;
     setWidth(offsetWidth || 900);
+    console.log(offsetWidth, width);
   }, []);
   return (
     <span
       style={{
         animationDelay: '0.' + getRandomArbitrary(0, 9) + 's',
-        left: getRandomArbitrary(50, width) + 'px',
-        top: getRandomArbitrary(50, 900) + 'px',
+        left: getRandomArbitrary(0, width) + 'px',
+        top: getRandomArbitrary(0, 740) + 'px',
       }}
       className={classnames(
         styles['estrela'],
